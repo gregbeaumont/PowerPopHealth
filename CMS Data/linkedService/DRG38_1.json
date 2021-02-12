@@ -1,0 +1,13 @@
+{
+	"name": "DRG38_1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://www.cms.gov/files/zip/icd-10-ms-drg-definitions-manual-files-v381-text.zip",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
