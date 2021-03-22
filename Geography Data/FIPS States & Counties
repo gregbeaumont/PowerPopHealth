@@ -1,0 +1,24 @@
+let
+    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/"),
+    #"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/FIPS/_FIPS_Raw txt" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/FIPS/",Name="FIPS_Raw.txt"]}[Content],
+    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/FIPS/_FIPS_Raw txt",[Delimiter=",", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Imported CSV",{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}}),
+    #"Removed Top Rows" = Table.Skip(#"Changed Type",70),
+    #"Removed Columns" = Table.RemoveColumns(#"Removed Top Rows",{"Column2", "Column3"}),
+    #"Filtered Rows" = Table.SelectRows(#"Removed Columns", each ([Column1] <> " ------------    --------------")),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Filtered Rows", [PromoteAllScalars=true]),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"  FIPS code        name", type text}}),
+    #"Trimmed Text" = Table.TransformColumns(#"Changed Type1",{{"  FIPS code        name", Text.Trim, type text}}),
+    #"Split Column by Position" = Table.SplitColumn(#"Trimmed Text", "  FIPS code        name", Splitter.SplitTextByPositions({0, 5}, false), {"  FIPS code        name.1", "  FIPS code        name.2"}),
+    #"Trimmed Text1" = Table.TransformColumns(#"Split Column by Position",{{"  FIPS code        name.2", Text.Trim, type text}}),
+    #"Duplicated Column" = Table.DuplicateColumn(#"Trimmed Text1", "  FIPS code        name.1", "  FIPS code        name.1 - Copy"),
+    #"Split Column by Position1" = Table.SplitColumn(#"Duplicated Column", "  FIPS code        name.1 - Copy", Splitter.SplitTextByPositions({0, 2}, false), {"  FIPS code        name.1 - Copy.1", "  FIPS code        name.1 - Copy.2"}),
+    #"Removed Columns1" = Table.RemoveColumns(#"Split Column by Position1",{"  FIPS code        name.1 - Copy.2"}),
+    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns1",{{"  FIPS code        name.1", "FIPS Counties"}, {"  FIPS code        name.2", "County"}, {"  FIPS code        name.1 - Copy.1", "FIPS States"}}),
+    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"FIPS States"}, #"FIPS States", {"FIPS States"}, "FIPS States.1", JoinKind.LeftOuter),
+    #"Expanded FIPS States.1" = Table.ExpandTableColumn(#"Merged Queries", "FIPS States.1", {"State", "FIPS States Key"}, {"State", "FIPS States Key"}),
+    #"Duplicated Column1" = Table.DuplicateColumn(#"Expanded FIPS States.1", "FIPS Counties", "FIPS Counties - Copy"),
+    #"Renamed Columns1" = Table.RenameColumns(#"Duplicated Column1",{{"FIPS Counties - Copy", "FIPS Counties Key"}}),
+    #"Changed Type2" = Table.TransformColumnTypes(#"Renamed Columns1",{{"FIPS Counties Key", Int64.Type}})
+in
+    #"Changed Type2"
