@@ -1,0 +1,10 @@
+let
+    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/"),
+    #"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/ICD10_PCS_2021/_ICD10_PCS_2021 txt" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/ICD10_PCS_2021/",Name="ICD10_PCS_2021.txt"]}[Content],
+    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/ICD10_PCS_2021/_ICD10_PCS_2021 txt",null,{0, 6, 14, 16, 77},ExtraValues.Ignore,1252),
+    #"Changed Type" = Table.TransformColumnTypes(#"Imported CSV",{{"Column1", Int64.Type}, {"Column2", type text}, {"Column3", Int64.Type}, {"Column4", type text}, {"Column5", type text}}),
+    #"Trimmed Text" = Table.TransformColumns(#"Changed Type",{{"Column4", Text.Trim, type text}, {"Column5", Text.Trim, type text}, {"Column2", Text.Trim, type text}}),
+    #"Renamed Columns" = Table.RenameColumns(#"Trimmed Text",{{"Column1", "ICD10 PCS Order Number"}, {"Column2", "ICD10 PCS"}, {"Column3", "HIPAA Covered"}, {"Column4", "ICD10 PCS Short Description"}, {"Column5", "ICD10 PCS Long Description"}}),
+    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "ICD10 PCS with Description", each [ICD10 PCS] & " - " & [ICD10 PCS Short Description])
+in
+    #"Added Custom"
