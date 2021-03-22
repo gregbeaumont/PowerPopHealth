@@ -1,7 +1,7 @@
 let
-    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_FOLDER/"),
-    #"https://YOUR_DATA_LAKE dfs core windows net/YOUR_FOLDER/ICD10_2021/e08ef883-ea5f-4ae6-9349-22145853cabd/2021-code-descriptions-tabular-order/_icd10cm_order_2021 txt" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_FOLDER/ICD10_2021/e08ef883-ea5f-4ae6-9349-22145853cabd/2021-code-descriptions-tabular-order/",Name="icd10cm_order_2021.txt"]}[Content],
-    #"Imported CSV" = Csv.Document(#"https://powerpophealth dfs core windows net/powerpophealth/ICD10_2021/e08ef883-ea5f-4ae6-9349-22145853cabd/2021-code-descriptions-tabular-order/_icd10cm_order_2021 txt",null,{0, 6, 14, 16, 77},ExtraValues.Ignore,1252),
+    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/"),
+    #"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/ICD10_CM_2021/_icd10cm_order_2021 txt" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/ICD10_CM_2021/",Name="icd10cm_order_2021.txt"]}[Content],
+    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/ICD10_CM_2021/_icd10cm_order_2021 txt",null,{0, 6, 14, 16, 77},ExtraValues.Ignore,1252),
     #"Changed Type" = Table.TransformColumnTypes(#"Imported CSV",{{"Column1", Int64.Type}, {"Column2", type text}, {"Column3", Int64.Type}, {"Column4", type text}, {"Column5", type text}}),
     #"Trimmed Text" = Table.TransformColumns(#"Changed Type",{{"Column5", Text.Trim, type text}, {"Column4", Text.Trim, type text}, {"Column2", Text.Trim, type text}}),
     #"Renamed Columns" = Table.RenameColumns(#"Trimmed Text",{{"Column1", "ICD10 Order Number"}, {"Column2", "ICD10 CM"}, {"Column3", "HIPAA Covered"}, {"Column4", "ICD10 CM Short Description"}, {"Column5", "ICD10 CM Long Description"}}),
