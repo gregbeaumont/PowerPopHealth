@@ -1,7 +1,7 @@
 let
-    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/"),
-    #"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/FIPS/_FIPS_Raw txt" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/FIPS/",Name="FIPS_Raw.txt"]}[Content],
-    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/FIPS/_FIPS_Raw txt",[Delimiter=",", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE_FOLDER/"),
+    #"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE_FOLDER/FIPS/_FIPS_Raw txt" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE_FOLDER/FIPS/",Name="FIPS_Raw.txt"]}[Content],
+    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE_FOLDER/FIPS/_FIPS_Raw txt",[Delimiter=",", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),
     #"Changed Type" = Table.TransformColumnTypes(#"Imported CSV",{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}}),
     #"Removed Top Rows" = Table.Skip(#"Changed Type",70),
     #"Removed Columns" = Table.RemoveColumns(#"Removed Top Rows",{"Column2", "Column3"}),
