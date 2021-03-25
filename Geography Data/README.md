@@ -6,13 +6,12 @@ Sources for these tables include:
 FCC FIPS list - https://transition.fcc.gov/oet/info/maps/census/fips/fips.txt 
 
 <b>Deployment Instructions</b>
-1. In the <b>ARM_Geography</b> file, change "YOUR_DATA_LAKE" to the name of your Azure Data Lake. Deploy Azure ARM Template.
-2. Deploy the <b>FIPS States</b> M code to either Power BI Power Query or Power BI DataFlows.
-3. Next deploy the <b>FIPS States & Counties</b> M code to either Power BI Power Query or Power BI DataFlows. Note that this script references <b>FIPS States</b> so they need to be deployed in sequence. In DataFlows these scripts will require a Power BI Premium Workspace.
+1. In the <b>ARM_CDC</b> file, change "YOUR_DATA_LAKE" to the name of your Azure Data Lake. Deploy Azure ARM Template.
+2. The <b>CDC Daily PM2.5 Concentrations Air Quality</b> and <b>CDC Population Weighted UV Irradiance</b> can be deployed to either Power BI Power Query or Power BI DataFlows together or separately.
 
 <b>Relatable Data in Power Pop Health</b>
-1. CDC Daily PM2.5 Concentrations Air Quality - 
-2. CDC Population Weighted UV Irradiance - 
+1. FIPS States & Counties - https://github.com/gregbeaumont/PowerPopHealth/blob/main/Geography%20Data/FIPS%20States%20%26%20Counties
+2. Date Table - https://github.com/gregbeaumont/PowerPopHealth/tree/main/Date%20%26%20Time%20Scripts 
 
 <b>Notes</b><br>
-  Two County FIPS values are missing when connecting to the CDC datasets, 08014 an 12086. 
+  Two County FIPS values do not find matches when connecting to the FIPS States & Counties dataset, 08014 an 12086. 
