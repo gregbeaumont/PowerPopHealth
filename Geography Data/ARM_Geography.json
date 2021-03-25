@@ -5,11 +5,11 @@
         "factoryName": {
             "type": "string",
             "metadata": "Data Factory name",
-            "defaultValue": "Geography"
+            "defaultValue": "DATA_FACTORY_NAME"
         },
         "YOUR_DATA_LAKE_accountKey": {
             "type": "secureString",
-            "metadata": "Secure string for 'accountKey' of 'PowerPopHealth'"
+            "metadata": "Secure string for 'accountKey' of 'YOUR_DATA_LAKE'"
         },
         "YOUR_DATA_LAKE_properties_typeProperties_url": {
             "type": "string",
@@ -92,7 +92,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "PowerPopHealth",
+                    "referenceName": "YOUR_DATA_LAKE",
                     "type": "LinkedServiceReference"
                 },
                 "annotations": [],
@@ -106,7 +106,7 @@
                 }
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/PowerPopHealth')]"
+                "[concat(variables('factoryId'), '/linkedServices/YOUR_DATA_LAKE')]"
             ]
         },
         {
@@ -131,17 +131,17 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/PowerPopHealth')]",
+            "name": "[concat(parameters('factoryName'), '/YOUR_DATA_LAKE')]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {
                 "annotations": [],
                 "type": "AzureBlobFS",
                 "typeProperties": {
-                    "url": "[parameters('PowerPopHealth_properties_typeProperties_url')]",
+                    "url": "[parameters('YOUR_DATA_LAKE_properties_typeProperties_url')]",
                     "accountKey": {
                         "type": "SecureString",
-                        "value": "[parameters('PowerPopHealth_accountKey')]"
+                        "value": "[parameters('YOUR_DATA_LAKE_accountKey')]"
                     }
                 }
             },
