@@ -13,3 +13,6 @@ FCC FIPS list - https://transition.fcc.gov/oet/info/maps/census/fips/fips.txt
 <b>Relatable Data in Power Pop Health</b>
 1. CDC Daily PM2.5 Concentrations Air Quality - 
 2. CDC Population Weighted Global Horizontal Irradiance - 
+
+<b>Notes</>
+  Two County FIPS values are missing when connecting to the CDC datasets, 08014 an 12086. 
