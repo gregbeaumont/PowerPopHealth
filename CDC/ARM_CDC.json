@@ -5,15 +5,15 @@
         "factoryName": {
             "type": "string",
             "metadata": "Data Factory name",
-            "defaultValue": "CDCdata"
+            "defaultValue": "DATA_FACTORY_NAME"
         },
-        "AzureDataLake_accountKey": {
+        "YOUR_DATA_LAKE_accountKey": {
             "type": "secureString",
-            "metadata": "Secure string for 'accountKey' of 'AzureDataLake'"
+            "metadata": "Secure string for 'accountKey' of 'YOUR_DATA_LAKE'"
         },
-        "AzureDataLake_properties_typeProperties_url": {
+        "YOUR_DATA_LAKE_properties_typeProperties_url": {
             "type": "string",
-            "defaultValue": "https://powerpophealth.dfs.core.windows.net"
+            "defaultValue": "https://YOUR_DATA_LAKE.dfs.core.windows.net"
         },
         "CDCPM_properties_typeProperties_url": {
             "type": "string",
@@ -184,7 +184,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "AzureDataLake",
+                    "referenceName": "YOUR_DATA_LAKE",
                     "type": "LinkedServiceReference"
                 },
                 "annotations": [],
@@ -202,7 +202,7 @@
                 "schema": []
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/AzureDataLake')]"
+                "[concat(variables('factoryId'), '/linkedServices/YOUR_DATA_LAKE')]"
             ]
         },
         {
@@ -261,7 +261,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "AzureDataLake",
+                    "referenceName": "YOUR_DATA_LAKE",
                     "type": "LinkedServiceReference"
                 },
                 "annotations": [],
@@ -304,7 +304,7 @@
                 ]
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/AzureDataLake')]"
+                "[concat(variables('factoryId'), '/linkedServices/YOUR_DATA_LAKE')]"
             ]
         },
         {
@@ -333,7 +333,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/AzureDataLake')]",
+            "name": "[concat(parameters('factoryName'), '/YOUR_DATA_LAKE')]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {
