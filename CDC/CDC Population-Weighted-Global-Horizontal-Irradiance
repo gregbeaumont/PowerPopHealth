@@ -1,0 +1,18 @@
+let
+    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE_FOLDER/"),
+    #"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE_FOLDER/CDC/_CDC_Pop_Weighted_UV" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE_FOLDER/CDC/",Name="CDC_Pop_Weighted_UV"]}[Content],
+    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE_FOLDER/CDC/_CDC_Pop_Weighted_UV",[Delimiter=",", Columns=11, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"statefips", Int64.Type}, {"countyfips", Int64.Type}, {"year", Int64.Type}, {"month", Int64.Type}, {"day", Int64.Type}, {"edd", type number}, {"edr", type number}, {"i305", type number}, {"i310", type number}, {"i324", type number}, {"i380", type number}}),
+    #"Duplicated Column" = Table.DuplicateColumn(#"Changed Type", "countyfips", "countyfips - Copy"),
+    #"Changed Type2" = Table.TransformColumnTypes(#"Duplicated Column",{{"countyfips - Copy", type text}}),
+    #"Split Column by Position" = Table.SplitColumn(#"Changed Type2", "countyfips - Copy", Splitter.SplitTextByPositions({0, 3}, true), {"countyfips - Copy.1", "countyfips - Copy.2"}),
+    #"Removed Columns1" = Table.RemoveColumns(#"Split Column by Position",{"countyfips - Copy.1"}),
+    #"Changed Type3" = Table.TransformColumnTypes(#"Removed Columns1",{{"countyfips - Copy.2", Int64.Type}}),
+    #"Added Custom" = Table.AddColumn(#"Changed Type3", "FIPS Counties Key", each ([statefips] * 1000) + [#"countyfips - Copy.2"]),
+    #"Filtered Rows" = Table.SelectRows(#"Added Custom", each true),
+    #"Added Custom1" = Table.AddColumn(#"Filtered Rows", "Date", each #date([year],[month],[day])),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom1",{{"Date", type date}, {"FIPS Counties Key", Int64.Type}}),
+    #"Removed Columns" = Table.RemoveColumns(#"Changed Type1",{"statefips", "year", "month", "day", "countyfips", "countyfips - Copy.2"})
+in
+    #"Removed Columns"
