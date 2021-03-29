@@ -18,10 +18,10 @@ All attempts will be made to make deployment of the content no code or low code.
 
 ## What do You Need to Use Power Pop Health Content? ##
 Different technologies below may be needed for different components, depending on what you decide to deploy:
-1. *An Azure subscription* - Note that some of the Power BI DataFlows / Power Query scripts can be redirected to other sources if you don't have an Azure subscription.
-2. *Azure Data Lake Gen 2* - see below for depoloyment instructions
-3. *Azure Data Factory* - see below for depoloyment instructions
-4. *Azure SQL Database* - for specific data sets
-5. *Azure Synapse* - for specific solutions
-6. *Power BI* - DataFlows and/or Power Query, Power BI Desktop
-7. *Power BI Premium* - only required for some of the DataFlows
+1. **An Azure subscription** - Note that some of the Power BI DataFlows / Power Query scripts can be redirected to other sources if you don't have an Azure subscription.
+2. **Azure Data Lake Gen 2** - see below for depoloyment instructions
+3. **Azure Data Factory** - see below for depoloyment instructions
+4. **Azure SQL Database** - for specific data sets
+5. **Azure Synapse** - for specific solutions
+6. **Power BI** - DataFlows and/or Power Query, Power BI Desktop
+7. **Power BI Premium** - only required for some of the DataFlows
