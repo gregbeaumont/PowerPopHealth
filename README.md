@@ -17,6 +17,7 @@ All attempts will be made to make deployment of the content no code or low code.
 4. **Optimized Data** - Optimized Data will be cleaned, curated, transformed, and modeled to be ideal for efficient andf performant queries. Most of this content will be optimized for use with Power BI Power Query, DataFlows, and DataSets (Tabular Models).
 
 ## What do You Need to Use Power Pop Health Content? ##
+Different technologies below may be needed for different components, depending on what you decide to deploy:
 1. An Azure subscription. Note that some of the Power BI DataFlows / Power Query scripts can be redirected to other sources if you don't have an Azure subscription.
 2. Azure Data Lake Gen 2 (see below for depoloyment instructions)
 3. Azure Data Factory (see below for depoloyment instructions)
