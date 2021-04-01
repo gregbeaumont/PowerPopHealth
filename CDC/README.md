@@ -3,8 +3,8 @@ The files in this folder use Data from the CDC. <br>
 
 <b>Sources</b><br>
 Sources for these tables include: 
-Daily PM 2.5 Concentrations All Counties (Air Quality) - https://data.cdc.gov/Environmental-Health-Toxicology/Daily-PM2-5-Concentrations-All-County-2001-2016/7vdq-ztk9
-Population Weighted Ultraviolet Irradiance - https://data.cdc.gov/Environmental-Health-Toxicology/Population-Weighted-Ultraviolet-Irradiance-2004-20/h28b-t43q 
+1. Daily PM 2.5 Concentrations All Counties (Air Quality) - https://data.cdc.gov/Environmental-Health-Toxicology/Daily-PM2-5-Concentrations-All-County-2001-2016/7vdq-ztk9
+2. Population Weighted Ultraviolet Irradiance - https://data.cdc.gov/Environmental-Health-Toxicology/Population-Weighted-Ultraviolet-Irradiance-2004-20/h28b-t43q 
 
 <b>Deployment Instructions</b>
 1. In the <b>ARM_Geography</b> file, change "YOUR_DATA_LAKE" to the name of your Azure Data Lake. Deploy Azure ARM Template.
