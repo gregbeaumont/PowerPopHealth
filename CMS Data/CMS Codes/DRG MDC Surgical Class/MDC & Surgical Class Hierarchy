@@ -1,7 +1,7 @@
 let
-    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/"),
-    #"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/DRG38_1/_appendix_D_E txt" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/DRG38_1/",Name="appendix_D_E.txt"]}[Content],
-    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/DRG38_1/_appendix_D_E txt",[Delimiter="#(tab)", Columns=1, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/powerpophealth/"),
+    #"https://YOUR_DATA_LAKE dfs core windows net/powerpophealth/DRG38_1/_appendix_D_E txt" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/powerpophealth/DRG38_1/",Name="appendix_D_E.txt"]}[Content],
+    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/powerpophealth/DRG38_1/_appendix_D_E txt",[Delimiter="#(tab)", Columns=1, Encoding=1252, QuoteStyle=QuoteStyle.None]),
     #"Removed Top Rows" = Table.Skip(#"Imported CSV",29),
     #"Kept First Rows" = Table.FirstN(#"Removed Top Rows",175),
     #"Added Custom" = Table.AddColumn(#"Kept First Rows", "Hierarchy Filter", each if Text.Start([Column1],1) = "M" then Text.Start([Column1],6) else null),
