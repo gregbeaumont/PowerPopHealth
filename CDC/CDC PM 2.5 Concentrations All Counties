@@ -1,7 +1,7 @@
 let
-    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE_FOLDER/"),
-    #"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE_FOLDER/CDC/_CDC_PM25_Air_Quality csv" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE_FOLDER/CDC/",Name="CDC_PM25_Air_Quality.csv"]}[Content],
-    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE_FOLDER/CDC/_CDC_PM25_Air_Quality csv",[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/powerpophealth/"),
+    #"https://YOUR_DATA_LAKE dfs core windows net/powerpophealth/CDC/_CDC_PM25_Air_Quality csv" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/powerpophealth/CDC/",Name="CDC_PM25_Air_Quality.csv"]}[Content],
+    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/powerpophealth/CDC/_CDC_PM25_Air_Quality csv",[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
     #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"year", Int64.Type}, {"date", type date}, {"statefips", Int64.Type}, {"countyfips", Int64.Type}, {"PM25_max_pred", type number}, {"PM25_med_pred", type number}, {"PM25_mean_pred", type number}, {"PM25_pop_pred", type number}}),
     #"Added Custom" = Table.AddColumn(#"Changed Type", "FIPS Counties Key", each ([statefips] * 1000) + [countyfips]),
