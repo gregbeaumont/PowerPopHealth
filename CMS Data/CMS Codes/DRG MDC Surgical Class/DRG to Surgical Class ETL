@@ -1,7 +1,7 @@
 let
-    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/"),
-    #"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/DRG38_1/_appendix_A txt" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/YOUR_DATA_LAKE/DRG38_1/",Name="appendix_A.txt"]}[Content],
-    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/YOUR_DATA_LAKE/DRG38_1/_appendix_A txt",[Delimiter="|", Columns=1, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/powerpophealth/"),
+    #"https://YOUR_DATA_LAKE dfs core windows net/powerpophealth/DRG38_1/_appendix_A txt" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/powerpophealth/DRG38_1/",Name="appendix_A.txt"]}[Content],
+    #"Imported CSV" = Csv.Document(#"https://YOUR_DATA_LAKE dfs core windows net/powerpophealth/DRG38_1/_appendix_A txt",[Delimiter="|", Columns=1, Encoding=1252, QuoteStyle=QuoteStyle.None]),
     #"Removed Top Rows" = Table.Skip(#"Imported CSV",10),
     #"Split Column by Delimiter" = Table.SplitColumn(#"Removed Top Rows", "Column1", Splitter.SplitTextByEachDelimiter({" "}, QuoteStyle.Csv, false), {"Column1.1", "Column1.2"}),
     #"Added Custom" = Table.AddColumn(#"Split Column by Delimiter", "MDC", each if Text.Start([Column1.2],1) = " " then "00" else Text.Start([Column1.2],2)),
