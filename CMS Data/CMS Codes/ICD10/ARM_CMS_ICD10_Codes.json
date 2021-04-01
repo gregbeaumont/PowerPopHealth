@@ -7,13 +7,13 @@
             "metadata": "Data Factory name",
             "defaultValue": "DATA_FACTORY_NAME"
         },
-        "YOUR_DATA_LAKE_accountKey": {
+        "YOURDATALAKE_accountKey": {
             "type": "secureString",
-            "metadata": "Secure string for 'accountKey' of 'YOUR_DATA_LAKE'"
+            "metadata": "Secure string for 'accountKey' of 'YOURDATALAKE'"
         },
         "YOUR_DATA_LAKE_properties_typeProperties_url": {
             "type": "string",
-            "defaultValue": "https://YOUR_DATA_LAKE.dfs.core.windows.net"
+            "defaultValue": "https://YOURDATALAKE.dfs.core.windows.net"
         },
         "ICD10_2021_properties_typeProperties_url": {
             "type": "string",
@@ -33,17 +33,17 @@
     },
     "resources": [
         {
-            "name": "[concat(parameters('factoryName'), '/YOUR_DATA_LAKE')]",
+            "name": "[concat(parameters('factoryName'), '/YOURDATALAKE')]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {
                 "annotations": [],
                 "type": "AzureBlobFS",
                 "typeProperties": {
-                    "url": "[parameters('YOUR_DATA_LAKE_properties_typeProperties_url')]",
+                    "url": "[parameters('YOURDATALAKE_properties_typeProperties_url')]",
                     "accountKey": {
                         "type": "SecureString",
-                        "value": "[parameters('YOUR_DATA_LAKE_accountKey')]"
+                        "value": "[parameters('YOURDATALAKE_accountKey')]"
                     }
                 }
             },
@@ -356,7 +356,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "YOUR_DATA_LAKE",
+                    "referenceName": "YOURDATALAKE",
                     "type": "LinkedServiceReference"
                 },
                 "annotations": [],
@@ -370,7 +370,7 @@
                 }
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/YOUR_DATA_LAKE')]"
+                "[concat(variables('factoryId'), '/linkedServices/YOURDATALAKE')]"
             ]
         },
         {
@@ -379,7 +379,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "YOUR_DATA_LAKE",
+                    "referenceName": "YOURDATALAKE",
                     "type": "LinkedServiceReference"
                 },
                 "annotations": [],
@@ -393,7 +393,7 @@
                 }
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/YOUR_DATA_LAKE')]"
+                "[concat(variables('factoryId'), '/linkedServices/YOURDATALAKE')]"
             ]
         },
         {
@@ -402,7 +402,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "YOUR_DATA_LAKE",
+                    "referenceName": "YOURDATALAKE",
                     "type": "LinkedServiceReference"
                 },
                 "annotations": [],
@@ -425,7 +425,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "YOUR_DATA_LAKE",
+                    "referenceName": "YOURDATALAKE",
                     "type": "LinkedServiceReference"
                 },
                 "annotations": [],
@@ -439,7 +439,7 @@
                 }
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/YOUR_DATA_LAKE')]"
+                "[concat(variables('factoryId'), '/linkedServices/YOURDATALAKE')]"
             ]
         },
         {
