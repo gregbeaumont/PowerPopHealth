@@ -11,7 +11,7 @@
             "type": "secureString",
             "metadata": "Secure string for 'accountKey' of 'YOURDATALAKE'"
         },
-        "YOUR_DATA_LAKE_properties_typeProperties_url": {
+        "YOURDATALAKE_properties_typeProperties_url": {
             "type": "string",
             "defaultValue": "https://YOURDATALAKE.dfs.core.windows.net"
         },
@@ -416,7 +416,7 @@
                 }
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/YOUR_DATA_LAKE')]"
+                "[concat(variables('factoryId'), '/linkedServices/YOURDATALAKE')]"
             ]
         },
         {
