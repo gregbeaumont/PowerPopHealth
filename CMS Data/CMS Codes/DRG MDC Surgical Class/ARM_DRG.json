@@ -1,0 +1,179 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "DATA_FACTORY_NAME"
+        },
+        "YOURDATALAKE_accountKey": {
+            "type": "secureString",
+            "metadata": "Secure string for 'accountKey' of 'YOURDATALAKE'"
+        },
+        "YOURDATALAKE_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://powerpophealth.dfs.core.windows.net"
+        },
+        "DRG38_1_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://www.cms.gov/files/zip/icd-10-ms-drg-definitions-manual-files-v381-text.zip"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/DownloadDRG38_1')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Copy DRG38_1",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "BinarySource",
+                                "storeSettings": {
+                                    "type": "HttpReadSettings",
+                                    "requestMethod": "GET"
+                                },
+                                "formatSettings": {
+                                    "type": "BinaryReadSettings",
+                                    "compressionProperties": {
+                                        "type": "ZipDeflateReadSettings",
+                                        "preserveZipFileNameAsFolder": false
+                                    }
+                                }
+                            },
+                            "sink": {
+                                "type": "BinarySink",
+                                "storeSettings": {
+                                    "type": "AzureBlobFSWriteSettings",
+                                    "maxConcurrentConnections": 10,
+                                    "copyBehavior": "PreserveHierarchy"
+                                }
+                            },
+                            "enableStaging": false
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "DRG38_1",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "UnzippedDRG38_1",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {},
+                    "cancelAfter": {}
+                },
+                "annotations": [],
+                "lastPublishTime": "2021-02-09T15:24:35Z"
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/datasets/DRG38_1')]",
+                "[concat(variables('factoryId'), '/datasets/UnzippedDRG38_1')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/DRG38_1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "DRG38_1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Binary",
+                "typeProperties": {
+                    "location": {
+                        "type": "HttpServerLocation"
+                    },
+                    "compression": {
+                        "type": "ZipDeflate",
+                        "level": "Fastest"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/DRG38_1')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/UnzippedDRG38_1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "YOURDATALAKE",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Binary",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "folderPath": "DRG38_1",
+                        "fileSystem": "powerpophealth"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/YOURDATALAKE')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/YOURDATALAKE')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureBlobFS",
+                "typeProperties": {
+                    "url": "[parameters('YOURDATALAKE_properties_typeProperties_url')]",
+                    "accountKey": {
+                        "type": "SecureString",
+                        "value": "[parameters('YOURDATALAKE_accountKey')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/DRG38_1')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "HttpServer",
+                "typeProperties": {
+                    "url": "[parameters('DRG38_1_properties_typeProperties_url')]",
+                    "enableServerCertificateValidation": true,
+                    "authenticationType": "Anonymous"
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}
