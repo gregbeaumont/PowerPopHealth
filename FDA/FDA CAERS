@@ -1,0 +1,25 @@
+let
+    Source = AzureStorage.DataLake("https://YOUR_DATA_LAKE.dfs.core.windows.net/powerpophealth/"),
+    #"https://YOUR_DATA_LAKE dfs core windows net/powerpophealth/FDA/_FDA_food_CAERS json" = Source{[#"Folder Path"="https://YOUR_DATA_LAKE.dfs.core.windows.net/powerpophealth/FDA/",Name="FDA_food_CAERS.json"]}[Content],
+    #"Imported JSON" = Json.Document(#"https://YOUR_DATA_LAKE dfs core windows net/powerpophealth/FDA/_FDA_food_CAERS json",1252),
+    #"Converted to Table" = Record.ToTable(#"Imported JSON"),
+    #"Filtered Rows" = Table.SelectRows(#"Converted to Table", each ([Name] = "results")),
+    #"Expanded Value" = Table.ExpandListColumn(#"Filtered Rows", "Value"),
+    #"Expanded Value1" = Table.ExpandRecordColumn(#"Expanded Value", "Value", {"report_number", "outcomes", "date_created", "reactions", "date_started", "consumer", "products"}, {"report_number", "outcomes", "date_created", "reactions", "date_started", "consumer", "products"}),
+    #"Removed Columns" = Table.RemoveColumns(#"Expanded Value1",{"Name"}),
+    #"Expanded outcomes" = Table.ExpandListColumn(#"Removed Columns", "outcomes"),
+    #"Expanded reactions" = Table.ExpandListColumn(#"Expanded outcomes", "reactions"),
+    #"Expanded consumer" = Table.ExpandRecordColumn(#"Expanded reactions", "consumer", {"age", "age_unit", "gender"}, {"age", "age_unit", "gender"}),
+    #"Expanded products" = Table.ExpandListColumn(#"Expanded consumer", "products"),
+    #"Expanded products1" = Table.ExpandRecordColumn(#"Expanded products", "products", {"role", "name_brand", "industry_code", "industry_name"}, {"role", "name_brand", "industry_code", "industry_name"}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Expanded products1",{{"age", type number}}),
+    #"Trimmed Text" = Table.TransformColumns(#"Changed Type",{{"report_number", Text.Trim, type text}, {"outcomes", Text.Trim, type text}, {"date_created", Text.Trim, type text}, {"reactions", Text.Trim, type text}, {"age_unit", Text.Trim, type text}, {"gender", Text.Trim, type text}, {"role", Text.Trim, type text}, {"name_brand", Text.Trim, type text}, {"industry_code", Text.Trim, type text}, {"industry_name", Text.Trim, type text}}),
+    #"Added Custom" = Table.AddColumn(#"Trimmed Text", "Age in Years", each if [age_unit] = "day(s)" then ([age] / 365)
+else if [age_unit] = "Decade(s)" then ([age] * 10)
+else if [age_unit] = "month(s)" then ([age] / 12)
+else if [age_unit] = "week(s)" then ([age] / 52)
+else [age]),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Age in Years", type number}, {"report_number", type text}, {"outcomes", type text}, {"date_created", type date}, {"date_started", type date}, {"reactions", type text}, {"age_unit", type text}, {"gender", type text}, {"role", type text}, {"name_brand", type text}, {"industry_code", type text}, {"industry_name", type text}}),
+    #"Renamed Columns" = Table.RenameColumns(#"Changed Type1",{{"report_number", "Report Number"}, {"outcomes", "Outcomes"}, {"date_created", "Date Created"}, {"reactions", "Reactions"}, {"date_started", "Date Started"}, {"age", "Age"}, {"age_unit", "Age Unit"}, {"gender", "Gender"}, {"role", "Role"}, {"name_brand", "Name Brand"}, {"industry_code", "Industry Code"}, {"industry_name", "Industry Name"}})
+in
+    #"Renamed Columns"
