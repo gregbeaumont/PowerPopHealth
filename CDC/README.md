@@ -20,4 +20,4 @@ Sources for these tables include:
    - Date Scripts - https://github.com/gregbeaumont/PowerPopHealth/tree/main/Date%20%26%20Time%20Scripts 
 
 <b>Notes</b><br>
-  Two County FIPS values are missing when connecting to the CDC datasets, 08014 an 12086. 
+  Two County FIPS values are missing when connecting to the FCC FIPS States and Counties datasets, 08014 an 12086. 
