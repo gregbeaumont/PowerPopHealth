@@ -9,7 +9,7 @@ Power Pop Health is a collection of content intended to simplify the process of 
 2. Data Scientists
 3. Business Analysts
 
-## What types of Content are to be Expected in the Files? ##
+## What Content is to be Expected? ##
 All attempts will be made to make deployment of the content no code or low code. Documentation and content organization will focus on three type of content for specific audiences:
 1. **Raw Data** - Primarily Azure ARM Templates designed to get Open Data into a Data Lake without making any transformations. The ARM Templates will be low code or no code whenever possible.
 2. **Curated Data** - When source data requires significant transformations or cleanup to be usable, it will be labeled Curated Data. This data will still be in raw form without transformartions to granularity, but easier to use.
