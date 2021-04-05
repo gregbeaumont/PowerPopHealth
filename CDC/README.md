@@ -12,8 +12,12 @@ Sources for these tables include:
 3. Next deploy the <b>FIPS States & Counties</b> M code to either Power BI Power Query or Power BI DataFlows using the same method as step #2 above. Note that this script references <b>FIPS States</b> so they need to be deployed in sequence. In DataFlows these scripts will require a Power BI Premium Workspace.
 
 <b>Relatable Data in Power Pop Health</b>
-1. CDC Daily PM2.5 Concentrations Air Quality - 
-2. CDC Population Weighted Global Horizontal Irradiance - 
+1. CDC Daily PM2.5 Concentrations Air Quality
+   - FIPS States and Counties - https://github.com/gregbeaumont/PowerPopHealth/tree/main/Geography%20Data
+   - Date Scripts - https://github.com/gregbeaumont/PowerPopHealth/tree/main/Date%20%26%20Time%20Scripts
+2. CDC Population Weighted Global Horizontal Irradiance
+   - FIPS States and Counties - https://github.com/gregbeaumont/PowerPopHealth/tree/main/Geography%20Data
+   - Date Scripts - https://github.com/gregbeaumont/PowerPopHealth/tree/main/Date%20%26%20Time%20Scripts 
 
 <b>Notes</b><br>
   Two County FIPS values are missing when connecting to the CDC datasets, 08014 an 12086. 
