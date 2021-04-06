@@ -5,15 +5,15 @@
         "factoryName": {
             "type": "string",
             "metadata": "Data Factory name",
-            "defaultValue": "FDAFood"
+            "defaultValue": "DATA_FACTORY_NAME"
         },
-        "powerpophealth_accountKey": {
+        "YOURDATALAKE_accountKey": {
             "type": "secureString",
-            "metadata": "Secure string for 'accountKey' of 'powerpophealth'"
+            "metadata": "Secure string for 'accountKey' of 'YOURDATALAKE'"
         },
-        "powerpophealth_properties_typeProperties_url": {
+        "YOURDATALAKE_properties_typeProperties_url": {
             "type": "string",
-            "defaultValue": "https://powerpophealth.dfs.core.windows.net"
+            "defaultValue": "https://YOURDATALAKE.dfs.core.windows.net"
         },
         "FDAfood1_properties_typeProperties_url": {
             "type": "string",
@@ -34,7 +34,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "powerpophealth",
+                    "referenceName": "YOURDATALAKE",
                     "type": "LinkedServiceReference"
                 },
                 "annotations": [],
@@ -43,12 +43,13 @@
                     "location": {
                         "type": "AzureBlobFSLocation",
                         "folderPath": "FDA",
-                        "fileSystem": "powerpophealth"
+                        "fileSystem": "
+                        "
                     }
                 }
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/powerpophealth')]"
+                "[concat(variables('factoryId'), '/linkedServices/YOURDATALAKE')]"
             ]
         },
         {
@@ -82,7 +83,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "powerpophealth",
+                    "referenceName": "YOURDATALAKE",
                     "type": "LinkedServiceReference"
                 },
                 "annotations": [],
@@ -91,12 +92,13 @@
                     "location": {
                         "type": "AzureBlobFSLocation",
                         "folderPath": "FDA",
-                        "fileSystem": "powerpophealth"
+                        "fileSystem": "
+                        "
                     }
                 }
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/powerpophealth')]"
+                "[concat(variables('factoryId'), '/linkedServices/YOURDATALAKE')]"
             ]
         },
         {
@@ -257,17 +259,17 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/powerpophealth')]",
+            "name": "[concat(parameters('factoryName'), '/YOURDATALAKE')]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {
                 "annotations": [],
                 "type": "AzureBlobFS",
                 "typeProperties": {
-                    "url": "[parameters('powerpophealth_properties_typeProperties_url')]",
+                    "url": "[parameters('YOURDATALAKE_properties_typeProperties_url')]",
                     "accountKey": {
                         "type": "SecureString",
-                        "value": "[parameters('powerpophealth_accountKey')]"
+                        "value": "[parameters('YOURDATALAKE_accountKey')]"
                     }
                 }
             },
