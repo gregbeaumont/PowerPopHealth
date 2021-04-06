@@ -43,8 +43,7 @@
                     "location": {
                         "type": "AzureBlobFSLocation",
                         "folderPath": "FDA",
-                        "fileSystem": "
-                        "
+                        "fileSystem": "powerpophealth"
                     }
                 }
             },
@@ -92,8 +91,7 @@
                     "location": {
                         "type": "AzureBlobFSLocation",
                         "folderPath": "FDA",
-                        "fileSystem": "
-                        "
+                        "fileSystem": "powerpophealth"
                     }
                 }
             },
