@@ -7,8 +7,8 @@ Sources for these tables include:
 2. MDC and Surgical Class Hierarchy from Appendix D/E - https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/AcuteInpatientPPS/MS-DRG-Classifications-and-Software 
 
 <b>Prerequisites</b><br>
-1. Azure Data Factory (for ARM_DRG)
-2. Azure Data Lake (for ARM_DRG)
+1. Azure Data Factory (for ARM_DRG) - https://youtu.be/OIbfhVov3YY
+2. Azure Data Lake (for ARM_DRG) - https://youtu.be/AS3OhGCQ8EQ 
 3. Power BI Desktop or DataFlows (M code scripts)
 
 <b>Deployment Instructions</b>
