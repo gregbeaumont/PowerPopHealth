@@ -4,7 +4,7 @@ The files in this folder can be used to create Date and Time tables in Power BI 
 <b>Sources</b><br>
 These are custom Date and Time tables without a source.
 
-<b>Prerequisites</b><br>
+<b>Prerequisites</b>
 1. Power BI Desktop or DataFlows (M code scripts)
 
 <b>Deployment Instructions</b>
