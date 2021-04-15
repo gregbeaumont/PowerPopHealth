@@ -7,8 +7,8 @@ Sources for these tables include:
 2. Population Weighted Ultraviolet Irradiance - https://data.cdc.gov/Environmental-Health-Toxicology/Population-Weighted-Ultraviolet-Irradiance-2004-20/h28b-t43q 
 
 <b>Prerequisites</b><br>
-1. Azure Data Factory (for ARM_CDC)
-2. Azure Data Lake (for ARM_CDC)
+1. Azure Data Factory (for ARM_CDC) - https://youtu.be/OIbfhVov3YY
+2. Azure Data Lake (for ARM_CDC) - https://youtu.be/AS3OhGCQ8EQ
 3. Power BI Desktop or DataFlows (M code scripts)
 
 <b>Deployment Instructions</b>
