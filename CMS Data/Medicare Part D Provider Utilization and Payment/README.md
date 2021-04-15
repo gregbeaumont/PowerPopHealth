@@ -1,1 +1,1 @@
-
+Medicare Part D Provider and Utilization PAyment Data will be added in the next release of Power Pop Health. For now, it can be deployed to Azure as part of the End-to-End Azure Aynapse and Power BI demo at this link: https://github.com/kunal333/E2ESynapseDemo 
