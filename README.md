@@ -11,7 +11,7 @@ Power Pop Health is a collection of content intended to simplify the process of 
 
 ## What Data is Currently Available in Power Pop Health? ##
 
-![alt text](https://github.com/gregbeaumont/PowerPopHealth/blob/Images/Data_In_PPop.png?raw=true)
+![alt text](https://github.com/gregbeaumont/PowerPopHealth/blob/main/Images/Data_In_PPop.png?raw=true)
 
 ## What Types of Content are to be Expected? ##
 All attempts will be made to make deployment of the content no code or low code. Documentation and content organization will focus on three type of content for specific audiences:
