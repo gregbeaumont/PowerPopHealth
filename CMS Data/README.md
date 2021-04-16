@@ -1,1 +1,2 @@
-
+For the first release of Power Pop Health, the most current versions of DRG and ICD10 codes are included form CMS. Medicare Part D Provider Utilization and Payment
+Update Medicare Provider Utilization and Payment Data Inpatient will be part of the next release. An End-to-End Azure Synapse and Power BI (also ADLSv2, ADF) solution can be deployed from the following GitHub repository: https://github.com/kunal333/E2ESynapseDemo 
