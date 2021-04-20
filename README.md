@@ -9,7 +9,7 @@ Power Pop Health is a collection of content intended to simplify the process of 
 2. Data Scientists
 3. Business Analysts
 
-## What Data is Currently Available in Power Pop Health? ##
+## What Data is Currently Accessible using Power Pop Health? ##
 
 ![Available Data](https://github.com/gregbeaumont/PowerPopHealth/blob/main/Images/Data_In_PPop.png?raw=true)
 
