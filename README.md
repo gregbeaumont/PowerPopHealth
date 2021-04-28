@@ -37,6 +37,6 @@ Different technologies below may be needed for different components, depending o
 ## Deployment Instructions ##
 1. Deploy an Azure Data Lake - https://youtu.be/AS3OhGCQ8EQ
 2. Deploy an Azure Data Factory - https://youtu.be/OIbfhVov3YY
-3. Each set of Data will have a separate Azure ARM template you can deploy using the method in this video - https://youtu.be/Bg3zV_GIOJY
+3. Each set of Data will have a separate Azure ARM template you can deploy using the method in this video - https://youtu.be/Bg3zV_GIOJY . Here's the link in Azure where the cut-and-paste code can be deployed: https://ms.portal.azure.com/#create/Microsoft.Template
 4. Each set of Data will usually have an M script for Power Query - https://youtu.be/EZXOQylIjVo
 5. Each set of Data will usually have an M script that also works for DataFlows - https://youtu.be/_G2WniVVkMw
