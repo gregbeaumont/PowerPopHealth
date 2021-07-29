@@ -1,2 +1,2 @@
 ##Demos##
-<b>Regression Demo Example</ b> - This is the PBIX 
+<b>Regression Demo Example<b/> - This is the PBIX 
